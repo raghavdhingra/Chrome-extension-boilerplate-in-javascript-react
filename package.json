@@ -1,0 +1,59 @@
+{
+  "name": "blotup",
+  "version": "2.2.1",
+  "description": "blotup is your ultimate companion for unlocking the full potential of web content.",
+  "scripts": {
+    "build:clean": "rm -rf dist && rm -rf deployment",
+    "build:prod": "tsup --env.NODE_ENV production",
+    "build:compress": "mkdir deployment && zip -vr deployment/dist.zip dist/ -x '*.DS_Store'",
+    "build": "yarn build:clean && yarn build:prod && yarn build:compress",
+    "dev": "nodemon --watch src --ext js,jsx --exec \"tsup --env.NODE_ENV development\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annotate-anywhere/browser-extension.git"
+  },
+  "author": "blotup",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/annotate-anywhere/browser-extension.git/issues"
+  },
+  "homepage": "https://blotup.com",
+  "engines": {
+    "node": ">=16.14.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "pretty-quick --staged",
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "esbuild-plugin-svgr": "^1.0.1",
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "nodemon": "^3.1.7",
+    "prettier": "^2.8.1",
+    "pretty-quick": "^3.1.3",
+    "tsup": "^6.5.0"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.3",
+    "moment": "^2.29.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "redux-thunk": "^2.4.2",
+    "styled-components": "^5.3.9"
+  }
+}
